@@ -1,1 +1,1 @@
-# fs_fin_app_nest_react
+# FullStack app NestJs + React.js
