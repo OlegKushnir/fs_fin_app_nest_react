@@ -1,23 +1,28 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+// import { fetchAccounts } from "./backend/backend";
+import BalanceItem from "./BalanceItem";
 // import { fetchBalance } from "./backend/backend";
 
-function Balance({accounts}) {
-    const [balance, setBalance] = useState("");
+function Balance({accountsData}) {
+  // const [accountsData, setAccountsData] = useState("");
 
-    // useEffect(() => {
-    //     const getBalance = async () => {
-    //       const data = await fetchBalance(transaction.account_id);
-    //       setBalance(data);
-    //     };
-    //     getBalance();
-    // }, [accounts]);
+  // useEffect(() => {
+  //   const getBalance = async () => {
+  //     const accounts = await fetchAccounts();
+  //     setAccountsData(accounts);
+  //   };
+  //   if (!accountsData.length) {
+  //     getBalance();
+  //   }
+  // }, [accountsData]);
   return (
     <div>
-      <h3>
-        Balance: {balance}
-      </h3>
-
+      <h3>Balance</h3>
+      {accountsData &&
+        accountsData?.map((account) => (
+          <BalanceItem key={account.account_id} account={account} />
+        ))}
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { fetchTransactions } from "./backend/backend";
+import { fetchTransactions, fetchAccounts } from "./backend/backend";
 import Transaction from "./Transaction";
 import AddTransactionForm from "./AddTransactionForm";
 import Balance from "./Balance";
 
 function Dashboard() {
   const [transactions, setTransactions] = useState("");
-  const [balance, setBalance] = useState("");
+  const [accountsData, setAccountsData] = useState([]);
   const [err, setErr] = useState("");
 
   const updateTransactions = (newTransaction) => {
@@ -23,16 +23,18 @@ function Dashboard() {
     ));
   };
 
-  const lastTransaction = transactions[transactions?.length - 1];
+  // const lastTransaction = transactions[transactions?.length - 1];
 
   useEffect(() => {
     try {
       if (!transactions) {
-        const getTransactions = async () => {
+        const getData = async () => {
           const data = await fetchTransactions();
           setTransactions(data);
+          const accounts = await fetchAccounts();
+          setAccountsData(accounts);
         };
-        getTransactions();
+        getData();
       }
     } catch (error) {
       setErr(error);
@@ -40,8 +42,8 @@ function Dashboard() {
   }, [transactions]);
   return (
     <div className="App">
-      <div>
-        {/* <Balance balance= {balance}/> */}
+      <div className="left_panel">
+        <Balance accountsData={accountsData} />
         <AddTransactionForm
           updateTransactions={updateTransactions}
           setErr={setErr}
@@ -54,7 +56,7 @@ function Dashboard() {
             <h3>{err}</h3>
           </div>
         )}
-        {transactions && <Transaction transaction={lastTransaction} />}
+        {/* {transactions && <Transaction transaction={lastTransaction} />} */}
         {transactions && renderTransactions()}
       </div>
     </div>
