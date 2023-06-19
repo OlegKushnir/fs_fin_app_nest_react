@@ -1,12 +1,7 @@
-import {
-  Controller,
-  Get,
-  Param,
-  // ParseUUIDPipe,
-  // HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { CheckAccountIdPipe } from 'src/pipes/checkid.pipe';
+import { ResponseAccountDto } from './dtos/accounts.dto';
 
 @Controller('api')
 export class AccountsController {
@@ -16,7 +11,11 @@ export class AccountsController {
   getAccountById(
     @Param('id', CheckAccountIdPipe)
     id: string,
-  ): object {
+  ): Promise<ResponseAccountDto> {
     return this.accountsService.getAccountById(id);
+  }
+  @Get('accounts')
+  getAccountsInfo(): Promise<ResponseAccountDto[]> {
+    return this.accountsService.getAccountsInfo();
   }
 }

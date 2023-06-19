@@ -5,12 +5,20 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class AccountsService {
   constructor(private readonly prismaService: PrismaService) {}
-  async getAccountById(account_id: string) {
+  async getAccountById(account_id: string): Promise<ResponseAccountDto> {
     const account = await this.prismaService.account.findUnique({
       where: { account_id },
     });
     if (!account) throw new NotFoundException('Account not found.');
     return new ResponseAccountDto(account);
+  }
+
+  async getAccountsInfo(): Promise<ResponseAccountDto[]> {
+    const accounts = await this.prismaService.account.findMany();
+    if (!accounts?.length) throw new NotFoundException('Accounts not found.');
+    return accounts.map((ac) => {
+      return new ResponseAccountDto(ac);
+    });
   }
 
   async checkAccount(account_id: string): Promise<ResponseAccountDto> {
