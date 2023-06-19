@@ -46,6 +46,14 @@ export class TransactionsService {
       created_at: new Date(),
     };
     await this.prismaService.transaction.create({ data: newTransaction });
+    const account = await this.prismaService.account.findUnique({
+      where: { account_id },
+    });
+    const balance = account.balance + amount;
+    await this.prismaService.account.update({
+      where: { account_id },
+      data: { balance },
+    });
     return new ResponseTransactionDto(newTransaction);
   }
 }
