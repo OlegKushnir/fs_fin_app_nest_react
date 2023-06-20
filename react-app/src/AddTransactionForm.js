@@ -1,8 +1,9 @@
 import "./App.css";
+// import Switch from "./Switch";
 import { createTransaction } from "./backend/backend";
 import { useState } from "react";
 
-function AddTransactionForm({ updateTransactions, setErr }) {
+function AddTransactionForm({ updateInfo, setErr }) {
   const [accountId, setAccountId] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -23,20 +24,19 @@ function AddTransactionForm({ updateTransactions, setErr }) {
         account_id: accountId,
         amount: Number(amount),
       });
-      updateTransactions(res);
+      updateInfo(res);
       setAccountId("");
       setAmount("");
     } catch (error) {
       console.log(error);
       setErr(`Error ${error.response.data.message}`)
-      
     }
-    
   };
 
   return (
     <div className="formWrapper">
       <h2>Submit new transaction</h2>
+      {/* <Switch/> */}
       <form onSubmit={addTransaction}>
         <label>Account ID: </label>
         <input
@@ -45,7 +45,6 @@ function AddTransactionForm({ updateTransactions, setErr }) {
         />
         <label>Amount: </label>
         <input value={amount} onChange={handleAmount} />
-
         <input type="submit" />
       </form>
     </div>
