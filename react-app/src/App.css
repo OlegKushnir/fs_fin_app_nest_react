@@ -14,7 +14,7 @@
 
 .App form input {
   padding: 10px;
-  border: 1px solid rgb(0, 84, 211);;
+  border: 1px solid rgb(0, 84, 211);
   border-radius: 3px;
 }
 .App form input:last-child {
@@ -25,11 +25,20 @@
 }
 
 .left_panel {
-  padding: 25px;
-  width: 30%;
+  width: 33%;
   max-height: 50%;
   gap: 10px;
   border-right: 1px solid rgb(0, 84, 211);
+}
+
+.formWrapper {
+  padding: 20px;
+}
+
+.balance {
+  font-size: 16px;
+  padding: 20px;
+  border-bottom: 1px solid rgb(0, 84, 211);
 }
 
 .transactions {
@@ -37,17 +46,16 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 25px;
+  padding: 20px;
 
 }
 
 .transactions div {
-  min-height: 150px;
+  min-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
   border: 1px solid rgb(0, 84, 211);;
   border-radius: 5px;
-
 }
 
 

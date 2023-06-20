@@ -7,5 +7,4 @@ function BalanceItem({account}) {
     </div>
   );
 }
-
 export default BalanceItem;
