@@ -1,12 +1,15 @@
-
+ .toggle-radio {
+  margin-bottom: 10px;
+ }
   .switch {
     position: relative;
     width: 200px;
     height: 50px;
+    margin: 0 auto;
     text-align: center;
-    background: rgb(0, 84, 211);
+    background: var(--income-color);
     transition: all 0.2s ease;
-    border-radius: 25px;
+    border-radius: 5px;
     font-weight: 700;
   }
   .switch span {
@@ -14,11 +17,10 @@
     width: 20px;
     height: 4px;
     top: 50%;
-    left: 50%;
+    left: 42%;
     margin: -2px 0px 0px -4px;
     background: #fff;
     display: block;
-    /* transform: rotate(-45deg); */
     transition: all 0.2s ease;
   }
   .switch span:after {
@@ -45,23 +47,22 @@
   label[for=yes] {
     position: absolute;
     left: 10px;
-    height: 20px;
   }
   label[for=no] {
     position: absolute;
-    right: 10px;
+    right: 15px;
   }
   #no:checked ~ .switch {
-    background: rgb(255, 251, 0);
+    background: var(--expense-color);
   }
   #no:checked ~ .switch span {
     background: #fff;
-    margin-left: -8px;
+    margin-left: 10px;
   }
   #no:checked ~ .switch span:after {
     background: #fff;
-    height: 20px;
-    margin-top: -8px;
+    height: 0px;
+    margin-top: 0px;
     margin-left: 8px;
   }
   #yes:checked ~ .switch label[for=yes] {

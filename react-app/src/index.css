@@ -1,3 +1,7 @@
+:root {
+  --income-color: #00bc9c;
+  --expense-color:#eb4f37;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
