@@ -39,6 +39,8 @@ export class TransactionsService {
     account_id,
     amount,
   }: TransactionParam): Promise<ResponseTransactionDto> {
+    if (amount === 0)
+      throw new NotAcceptableException('Amount should not be equel 0');
     const newTransaction = {
       transaction_id: uuid(),
       account_id,
