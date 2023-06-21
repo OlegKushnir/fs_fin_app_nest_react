@@ -1,14 +1,32 @@
 import "./switch.css";
-function Switch() {
-  return (<div class="toggle-radio">
-  <input type="radio" name="rdo" id="yes" checked/>
-  <input type="radio" name="rdo" id="no"/>
-  <div class="switch">
-    <label for="yes">income</label>
-    <label for="no">expense</label>
-    <span></span>
-  </div>
-  </div>
+
+function Switch({ setIncome, income }) {
+  return (
+     <div className="toggle-radio">
+      <input
+        type="radio"
+        name="rdo"
+        id="yes"
+        checked={income}
+        readOnly
+      />
+      <input
+        type="radio"
+        name="rdo"
+        id="no"
+        checked={!income}
+        readOnly
+      />
+      <div className="switch">
+        <label htmlFor="yes" onClick={() => setIncome(true)}>
+          income
+        </label>
+        <label htmlFor="no" onClick={() => setIncome(false)}>
+          expense
+        </label>
+        <span></span>
+      </div>
+    </div>
   );
 }
 

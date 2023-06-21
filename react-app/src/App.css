@@ -19,8 +19,12 @@
 }
 .App form input:last-child {
   margin-top: 20px;
+  min-height: 50px;
   border: none;
-  color: rgb(255, 251, 0);
+  border-radius: 5px;
+  /* color: rgb(255, 251, 0); */
+  color: white;
+  font-weight: 700;
   background-color: rgb(0, 84, 211);
 }
 
@@ -54,8 +58,16 @@
   min-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
-  border: 1px solid rgb(0, 84, 211);;
+  /* border: 1px solid rgb(0, 84, 211);; */
   border-radius: 5px;
+}
+
+.income {
+  background-color: var(--income-color);
+}
+
+.expense {
+  background-color: var(--expense-color);
 }
 
 
