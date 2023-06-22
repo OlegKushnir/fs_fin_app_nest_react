@@ -6,6 +6,7 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  NotFoundException,
 } from '@nestjs/common';
 import {
   CreateTransactionDto,
@@ -36,11 +37,12 @@ export class TransactionsController {
   async createTransaction(
     @Body() body: CreateTransactionDto,
   ): Promise<ResponseTransactionDto> {
-    const account = await this.accountService.checkAccount(body.account_id);
-    const newTransaction = {
-      account_id: account.account_id,
-      amount: body.amount,
-    };
-    return this.transactionService.createTransaction(newTransaction);
+    const accountFrom = await this.accountService.checkAccount(
+      body.account_from,
+    );
+    const accountTo = await this.accountService.checkAccount(body.account_to);
+    if (!accountFrom || !accountTo)
+      throw new NotFoundException('Not found! Check accounts from/to.');
+    return this.transactionService.createTransaction(body);
   }
 }

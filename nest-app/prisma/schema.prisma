@@ -9,14 +9,19 @@ datasource db {
 
 model Transaction {
   transaction_id String   @id @default(uuid())
-  account_id     String
   amount         Float
+  description    String
   created_at     DateTime @default(now())
-  account        Account  @relation(fields: [account_id], references: [account_id])
+  account_from   String
+  from           Account  @relation("transaction_from", fields: [account_from], references: [account_id])
+  account_to     String
+  to             Account  @relation("transaction_to", fields: [account_to], references: [account_id])
+              
 }
 
 model Account {
   account_id   String        @id @default(uuid())
   balance      Float
-  transactions Transaction[]
+  from         Transaction[] @relation("transaction_from")
+  to           Transaction[] @relation("transaction_to")
 }

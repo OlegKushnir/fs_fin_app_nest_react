@@ -2,14 +2,17 @@ import {
   Injectable,
   NotFoundException,
   NotAcceptableException,
+  NotImplementedException,
 } from '@nestjs/common';
 import { ResponseTransactionDto } from './dtos/transactions.dto';
 import { v4 as uuid } from 'uuid';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 interface TransactionParam {
-  account_id: string;
   amount: number;
+  description: string;
+  account_from: string;
+  account_to: string;
 }
 
 export const trSelect = {};
@@ -36,26 +39,44 @@ export class TransactionsService {
     return new ResponseTransactionDto(transaction);
   }
   async createTransaction({
-    account_id,
+    account_from,
+    account_to,
     amount,
+    description,
   }: TransactionParam): Promise<ResponseTransactionDto> {
     if (amount === 0)
       throw new NotAcceptableException('Amount should not be equel 0');
     const newTransaction = {
       transaction_id: uuid(),
-      account_id,
       amount,
+      description,
       created_at: new Date(),
+      account_from,
+      account_to,
     };
-    await this.prismaService.transaction.create({ data: newTransaction });
-    const account = await this.prismaService.account.findUnique({
-      where: { account_id },
-    });
-    const balance = account.balance + amount;
-    await this.prismaService.account.update({
-      where: { account_id },
-      data: { balance },
-    });
-    return new ResponseTransactionDto(newTransaction);
+    try {
+      const createdTransaction = await this.prismaService.transaction.create({
+        data: newTransaction,
+      });
+      const accountFrom = await this.prismaService.account.findUnique({
+        where: { account_id: account_from },
+      });
+      const accountTo = await this.prismaService.account.findUnique({
+        where: { account_id: account_to },
+      });
+      const balance_from = accountFrom.balance - amount;
+      const balance_to = accountTo.balance + amount;
+      await this.prismaService.account.update({
+        where: { account_id: account_from },
+        data: { balance: balance_from },
+      });
+      await this.prismaService.account.update({
+        where: { account_id: account_to },
+        data: { balance: balance_to },
+      });
+      return new ResponseTransactionDto(createdTransaction);
+    } catch (error) {
+      throw new NotImplementedException('Transaction was not created.');
+    }
   }
 }

@@ -4,6 +4,7 @@ import { fetchTransactions, fetchAccounts } from "./backend/backend";
 import Transaction from "./Transaction";
 import AddTransactionForm from "./AddTransactionForm";
 import Balance from "./Balance";
+import AddAccount from "./AddAccount";
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
@@ -14,6 +15,10 @@ function Dashboard() {
     setTransactions([...transactions, newTransaction]);
     const accounts = await fetchAccounts();
     setAccountsData(accounts);
+  };
+
+  const updateAccounts = async (account) => {
+    setAccountsData([...accountsData, account]);
   };
 
   const renderTransactions = () => {
@@ -42,10 +47,8 @@ function Dashboard() {
     <div className="App">
       <div className="left_panel">
         <Balance accountsData={accountsData} />
-        <AddTransactionForm
-          updateInfo={updateInfo}
-          setErr={setErr}
-        />
+        <AddTransactionForm updateInfo={updateInfo} setErr={setErr} />
+        <AddAccount updateAccounts={updateAccounts} setErr={setErr} />
       </div>
       <div className="transactions">
         <h2>Transactions history </h2>
