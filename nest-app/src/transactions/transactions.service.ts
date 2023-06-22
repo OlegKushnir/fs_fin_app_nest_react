@@ -55,17 +55,23 @@ export class TransactionsService {
       account_to,
     };
     try {
-      const createdTransaction = await this.prismaService.transaction.create({
-        data: newTransaction,
-      });
       const accountFrom = await this.prismaService.account.findUnique({
         where: { account_id: account_from },
       });
       const accountTo = await this.prismaService.account.findUnique({
         where: { account_id: account_to },
       });
+
       const balance_from = accountFrom.balance - amount;
       const balance_to = accountTo.balance + amount;
+      if (balance_from < 0)
+        throw new NotImplementedException(
+          `Insufficient funds on account ${accountFrom.account_id}!`,
+        );
+      const createdTransaction = await this.prismaService.transaction.create({
+        data: newTransaction,
+      });
+
       await this.prismaService.account.update({
         where: { account_id: account_from },
         data: { balance: balance_from },
@@ -76,7 +82,9 @@ export class TransactionsService {
       });
       return new ResponseTransactionDto(createdTransaction);
     } catch (error) {
-      throw new NotImplementedException('Transaction was not created.');
+      throw new NotImplementedException(
+        `Transaction was not created. ${error.message}`,
+      );
     }
   }
 }
