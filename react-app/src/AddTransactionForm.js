@@ -1,18 +1,16 @@
 import "./App.css";
-// import Switch from "./Switch";
 import { createTransaction } from "./backend/backend";
 import { useState } from "react";
 
-function AddTransactionForm({ updateInfo, setErr }) {
+function AddTransactionForm({ updateInfo, accounts, setErr }) {
   const [accountFrom, setAccountFrom] = useState("");
   const [accountTo, setAccountTo] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescr] = useState("");
 
-  // const [income, setIncome] = useState(true);
-
   const handleAccountFrom = (evt) => {
     setAccountFrom(evt.target.value);
+    if (!evt.target.value) setAccountTo("");
   };
 
   const handleAccountTo = (evt) => {
@@ -29,8 +27,6 @@ function AddTransactionForm({ updateInfo, setErr }) {
 
   const addTransaction = async (evt) => {
     evt.preventDefault();
-    // let finalAmount;
-    // income ? (finalAmount = amount) : (finalAmount = -amount);
     try {
       setErr("");
       const res = await createTransaction({
@@ -52,18 +48,47 @@ function AddTransactionForm({ updateInfo, setErr }) {
   return (
     <div className="formWrapper">
       <h2>Submit new transaction</h2>
-      {/* <Switch setIncome={setIncome} income={income} /> */}
       <form onSubmit={addTransaction}>
         <label>Account From: </label>
-        <input value={accountFrom} onChange={handleAccountFrom} />
+        <select
+          name="accountFrom"
+          value={accountFrom}
+          onChange={handleAccountFrom}
+          required
+        >
+          <option value="">choose account</option>
+          {accounts?.map((ac) => (
+            <option key={ac} value={ac}>
+              {ac}
+            </option>
+          ))}
+        </select>
         <label>Account To: </label>
-        <input value={accountTo} onChange={handleAccountTo} />
+        <select
+          name="accountTo"
+          value={accountTo}
+          onChange={handleAccountTo}
+          disabled={!accountFrom}
+          required
+        >
+          <option value="">choose account</option>
+          {accounts?.reduce((filtered, ac) => {
+            if (ac !== accountFrom) {
+              return [
+                ...filtered,
+                <option key={ac} value={ac}>{ac}</option>
+              ];
+            }
+            return filtered;
+          }, [])}
+        </select>
         <label>Amount: </label>
         <input
           value={amount}
           onChange={handleAmount}
           pattern="[0-9]+"
           title="Enter only numbers"
+          required
         />
         <label>Description: </label>
         <input value={description} onChange={handleDescr} />

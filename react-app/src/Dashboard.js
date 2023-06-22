@@ -10,11 +10,12 @@ function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [accountsData, setAccountsData] = useState([]);
   const [err, setErr] = useState("");
+  const accounts = accountsData?.map(ac => ac.account_id)
 
   const updateInfo = async (newTransaction) => {
     setTransactions([...transactions, newTransaction]);
-    const accounts = await fetchAccounts();
-    setAccountsData(accounts);
+    const updAcs = await fetchAccounts();
+    setAccountsData(updAcs);
   };
 
   const updateAccounts = async (account) => {
@@ -47,7 +48,7 @@ function Dashboard() {
     <div className="App">
       <div className="left_panel">
         <Balance accountsData={accountsData} />
-        <AddTransactionForm updateInfo={updateInfo} setErr={setErr} />
+        <AddTransactionForm updateInfo={updateInfo} accounts={accounts} setErr={setErr} />
         <AddAccount updateAccounts={updateAccounts} setErr={setErr} />
       </div>
       <div className="transactions">
