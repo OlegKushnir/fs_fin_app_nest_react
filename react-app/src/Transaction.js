@@ -1,12 +1,9 @@
-
-function Transaction({ transaction}) {
-const income = transaction?.amount > 0 ? true : false;
+function Transaction({ transaction }) {
   return (
-    <div className={income ? "income" : "expense"}>
-      <h3>Transaction amount ({transaction?.amount > 0 ? "income" : "expense"}) account {transaction?.account_from}</h3>
+    <div className="income">
+      <h3>Account {transaction?.account_from}</h3>
       <p>
-        Transfered {transaction?.amount}${" "}
-        {income ? "to" : "from"} account{" "}
+        Transfered <b>{transaction?.amount}$</b> to account{" "}
         {transaction?.account_to}
       </p>
     </div>

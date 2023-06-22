@@ -12,7 +12,7 @@
   gap: 10px;
 }
 
-.App form input {
+.App form input, .App form select {
   padding: 10px;
   border: 1px solid rgb(0, 84, 211);
   border-radius: 3px;
