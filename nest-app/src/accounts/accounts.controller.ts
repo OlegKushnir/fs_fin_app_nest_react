@@ -1,7 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { CheckAccountIdPipe } from 'src/pipes/checkid.pipe';
-import { ResponseAccountDto } from './dtos/accounts.dto';
+import { CreateAccountDto, ResponseAccountDto } from './dtos/accounts.dto';
 
 @Controller('api')
 export class AccountsController {
@@ -17,5 +17,11 @@ export class AccountsController {
   @Get('accounts')
   getAccountsInfo(): Promise<ResponseAccountDto[]> {
     return this.accountsService.getAccountsInfo();
+  }
+  @Post('account')
+  createAccount(
+    @Body() { balance }: CreateAccountDto,
+  ): Promise<ResponseAccountDto> {
+    return this.accountsService.createAccount(balance);
   }
 }

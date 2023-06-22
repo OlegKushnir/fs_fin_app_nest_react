@@ -22,7 +22,6 @@
   min-height: 50px;
   border: none;
   border-radius: 5px;
-  /* color: rgb(255, 251, 0); */
   color: white;
   font-weight: 700;
   background-color: rgb(0, 84, 211);
@@ -30,7 +29,7 @@
 
 .left_panel {
   width: 33%;
-  max-height: 50%;
+  min-width: 415px;
   gap: 10px;
   border-right: 1px solid rgb(0, 84, 211);
 }

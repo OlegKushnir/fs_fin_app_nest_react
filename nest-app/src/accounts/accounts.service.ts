@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ResponseAccountDto } from './dtos/accounts.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class AccountsService {
@@ -26,16 +27,27 @@ export class AccountsService {
       where: { account_id },
     });
 
-    if (!validUser) {
-      const newAccount = {
-        account_id,
-        balance: 0,
-      };
-      await this.prismaService.account.create({
-        data: newAccount,
-      });
-      return new ResponseAccountDto(newAccount);
-    }
+    if (!validUser) throw new NotFoundException('Account not found.');
+
+    // if (!validUser) {
+    //   const newAccount = {
+    //     account_id,
+    //     balance: 0,
+    //   };
+    //   await this.prismaService.account.create({
+    //     data: newAccount,
+    //   });
+    //   return new ResponseAccountDto(newAccount);
+    // }
     return new ResponseAccountDto(validUser);
+  }
+
+  async createAccount(balance = 0): Promise<ResponseAccountDto> {
+    const newAccount = await this.prismaService.account.create({
+      data: {
+        balance,
+      },
+    });
+    return new ResponseAccountDto(newAccount);
   }
 }

@@ -14,10 +14,14 @@ export async function fetchBalance(id) {
 export async function fetchAccounts() {
   const res = await axios.get("accounts");
   return res.data;
-  // return [{account_id: "0c18647a-ba8a-419f-8d72-af7ee92429c0", balance: 120}]
 }
 
 export async function createTransaction(transaction) {
   const res = await axios.post("transactions", transaction);
+  return res.data;
+}
+
+export async function createAccount(balance) {
+  const res = await axios.post("account", balance);
   return res.data;
 }

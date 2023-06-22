@@ -1,13 +1,25 @@
-import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateTransactionDto {
   @IsNotEmpty()
   @IsNumber()
   amount: number;
 
+  description: string;
+
   @IsNotEmpty()
   @IsUUID()
-  account_id: string;
+  account_from: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  account_to: string;
 }
 
 export class ResponseTransactionDto {
@@ -17,7 +29,14 @@ export class ResponseTransactionDto {
 
   @IsNotEmpty()
   @IsUUID()
-  account_id: string;
+  account_from: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  account_to: string;
+
+  @IsString()
+  description: string;
 
   @IsNotEmpty()
   @IsNumber()
