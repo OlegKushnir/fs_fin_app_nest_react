@@ -3,7 +3,7 @@ import { createAccount } from "./backend/backend";
 import { useState } from "react";
 
 function AddAccount({ setErr, updateAccounts }) {
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState("");
 
   const handleBalance = (evt) => {
     setBalance(evt.target.value);
@@ -25,14 +25,15 @@ function AddAccount({ setErr, updateAccounts }) {
   };
 
   return (
-    <div className="formWrapper">
+    <div className="add_acc">
       <h2>Create new account</h2>
       <form onSubmit={addAccount}>
-        <label>Balance: </label>
+        {/* <label>Balance: </label> */}
         <input
+          type="text"
           value={balance}
           onChange={handleBalance}
-          placeholder="Leave blank if balance is 0"
+          placeholder="Balance (leave blank if balance is 0)"
         />
         <input type="submit" value="Create" />
       </form>

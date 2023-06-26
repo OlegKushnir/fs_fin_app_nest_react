@@ -2,8 +2,8 @@ import "./App.css";
 
 function BalanceItem({account}) {
   return (
-    <div>
-      <p>{account.account_id}: {account.balance}$</p>
+    <div className="balance_item">
+      <p>{account.account_id}: <span>{account.balance}$</span></p>
     </div>
   );
 }

@@ -46,24 +46,24 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
   };
 
   return (
-    <div className="formWrapper">
+    <div className="add_transaction">
       <h2>Submit new transaction</h2>
       <form onSubmit={addTransaction}>
-        <label>Account From: </label>
+        {/* <label>Account From: </label> */}
         <select
           name="accountFrom"
           value={accountFrom}
           onChange={handleAccountFrom}
           required
         >
-          <option value="">choose account</option>
+          <option value="">account from</option>
           {accounts?.map((ac) => (
             <option key={ac} value={ac}>
               {ac}
             </option>
           ))}
         </select>
-        <label>Account To: </label>
+        {/* <label>Account To: </label> */}
         <select
           name="accountTo"
           value={accountTo}
@@ -71,7 +71,7 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
           disabled={!accountFrom}
           required
         >
-          <option value="">choose account</option>
+          <option value="">account to</option>
           {accounts?.reduce((filtered, ac) => {
             if (ac !== accountFrom) {
               return [
@@ -82,16 +82,17 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
             return filtered;
           }, [])}
         </select>
-        <label>Amount: </label>
+        {/* <label>Amount: </label> */}
         <input
+          placeholder="amount"
           value={amount}
           onChange={handleAmount}
           pattern="[0-9]+"
           title="Enter only numbers"
           required
         />
-        <label>Description: </label>
-        <input value={description} onChange={handleDescr} />
+        {/* <label>Description: </label> */}
+        <input placeholder="description" value={description} onChange={handleDescr} />
         <input type="submit" value="Submit" />
       </form>
     </div>

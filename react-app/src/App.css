@@ -1,9 +1,9 @@
 .App {
   display: flex;
-  margin: 20px;
+  margin: 10px;
   border: 1px solid rgb(0, 84, 211);
   border-radius: 5px;
-  min-height: calc(100vh - 42px);
+  height:calc( 100vh - 20px);
 }
 
 .App form {
@@ -12,14 +12,13 @@
   gap: 10px;
 }
 
-.App form input, .App form select {
+.App form input,
+.App form select {
   padding: 10px;
   border: 1px solid rgb(0, 84, 211);
   border-radius: 3px;
 }
 .App form input:last-child {
-  margin-top: 20px;
-  min-height: 50px;
   border: none;
   border-radius: 5px;
   color: white;
@@ -32,16 +31,57 @@
   min-width: 415px;
   gap: 10px;
   border-right: 1px solid rgb(0, 84, 211);
+  /* overflow-y: auto */
 }
 
-.formWrapper {
-  padding: 20px;
+.left_panel h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.add_transaction {
+  padding: 10px;
+  max-height: 35%;
+  border-bottom: 1px solid rgb(0, 84, 211);
 }
 
 .balance {
-  font-size: 16px;
-  padding: 20px;
+  padding: 10px 0 10px 10px;
+  min-height: 30%;
+  max-height: 45%;
   border-bottom: 1px solid rgb(0, 84, 211);
+  overflow-y: auto;
+}
+
+.add_acc {
+  padding: 10px;
+  min-height: 20%;
+}
+.add_acc form {
+  width: 100%;
+  flex-direction: row;
+}
+
+.add_acc input[type="submit"] {
+  min-width: 33%;
+}
+.add_acc input[type="text"] {
+  width: 100%;
+}
+
+.balance_item {
+  padding: 5px;
+  border-bottom: 1px solid rgb(0, 84, 211);
+  /* border-radius: 3px; */
+  margin-bottom: 2px;
+}
+.balance_item p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.balance span {
+  font-weight: 700;
 }
 
 .transactions {
@@ -49,15 +89,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px;
-
+  padding: 10px;
+  overflow-y: auto;
 }
 
 .transactions div {
   min-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
-  /* border: 1px solid rgb(0, 84, 211);; */
   border-radius: 5px;
 }
 
@@ -68,10 +107,3 @@
 .expense {
   background-color: var(--expense-color);
 }
-
-
-
-
-
-
-

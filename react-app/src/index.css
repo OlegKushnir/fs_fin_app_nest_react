@@ -1,6 +1,6 @@
 :root {
   --income-color: #00bc9c;
-  --expense-color:#eb4f37;
+  --expense-color: #eb4f37;
 }
 body {
   margin: 0;
@@ -15,5 +15,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-    
+}
+
+p,h2,h3 {
+  margin: 0;
 }
