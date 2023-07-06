@@ -28,10 +28,7 @@ function Dashboard() {
       <Transaction transaction={transaction} key={index} />
     ));
   };
-
   useEffect(() => {
-    try {
-      if (!transactions.length) {
         const getData = async () => {
           const data = await fetchTransactions();
           setTransactions(data);
@@ -39,11 +36,8 @@ function Dashboard() {
           setAccountsData(accounts);
         };
         getData();
-      }
-    } catch (error) {
-      setErr(error);
-    }
-  }, [transactions]);
+  }, []);
+
   return (
     <div className="App">
       <div className="left_panel">

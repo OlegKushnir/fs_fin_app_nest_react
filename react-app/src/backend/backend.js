@@ -1,5 +1,7 @@
 import axios from "axios";
+// axios.defaults.baseURL = "https://fin-api.adaptable.app/api";
 axios.defaults.baseURL = "http://localhost:5000/api";
+
 
 export async function fetchTransactions() {
   const res = await axios.get("transactions");
