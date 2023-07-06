@@ -4,6 +4,7 @@ import { useState } from "react";
 
 function AddAccount({ setErr, updateAccounts }) {
   const [balance, setBalance] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleBalance = (evt) => {
     setBalance(evt.target.value);
@@ -12,6 +13,7 @@ function AddAccount({ setErr, updateAccounts }) {
   const addAccount = async (evt) => {
     evt.preventDefault();
     try {
+      setLoading(true)
       setErr("");
       const account = await createAccount({
         balance: Number(balance),
@@ -22,20 +24,21 @@ function AddAccount({ setErr, updateAccounts }) {
       console.log(error);
       setErr(`Error ${error.response.data.message}`);
     }
+    setLoading(false);
+    setErr("");
   };
 
   return (
     <div className="add_acc">
       <h2>Create new account</h2>
       <form onSubmit={addAccount}>
-        {/* <label>Balance: </label> */}
         <input
           type="text"
           value={balance}
           onChange={handleBalance}
           placeholder="Balance (leave blank if balance is 0)"
         />
-        <input type="submit" value="Create" />
+        <input type="submit" value="Create" disabled={loading}/>
       </form>
     </div>
   );

@@ -5,7 +5,7 @@ function Balance({ accountsData }) {
   console.log(accountsData);
   return (
     <div className="balance">
-      <h2>Balance</h2>
+      <h2>Accounts Balance</h2>
       {accountsData &&
         accountsData?.map((account) => (
           <BalanceItem key={account.account_id} account={account} />

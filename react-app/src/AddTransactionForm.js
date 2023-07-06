@@ -7,6 +7,7 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
   const [accountTo, setAccountTo] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescr] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleAccountFrom = (evt) => {
     setAccountFrom(evt.target.value);
@@ -28,6 +29,7 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
   const addTransaction = async (evt) => {
     evt.preventDefault();
     try {
+      setLoading(true)
       setErr("");
       const res = await createTransaction({
         account_from: accountFrom,
@@ -43,13 +45,14 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
       console.log(error);
       setErr(`Error ${error.response.data.message}`);
     }
+    setLoading(false);
+    setErr("");
   };
 
   return (
     <div className="add_transaction">
-      <h2>Submit new transaction</h2>
+      <h2>Create new transaction</h2>
       <form onSubmit={addTransaction}>
-        {/* <label>Account From: </label> */}
         <select
           name="accountFrom"
           value={accountFrom}
@@ -63,7 +66,6 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
             </option>
           ))}
         </select>
-        {/* <label>Account To: </label> */}
         <select
           name="accountTo"
           value={accountTo}
@@ -82,7 +84,6 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
             return filtered;
           }, [])}
         </select>
-        {/* <label>Amount: </label> */}
         <input
           placeholder="amount"
           value={amount}
@@ -91,9 +92,8 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
           title="Enter only numbers"
           required
         />
-        {/* <label>Description: </label> */}
         <input placeholder="description" value={description} onChange={handleDescr} />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" disabled={loading} />
       </form>
     </div>
   );
