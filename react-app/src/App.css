@@ -27,11 +27,14 @@
 }
 
 .left_panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 33%;
   min-width: 415px;
   gap: 10px;
   border-right: 1px solid rgb(0, 84, 211);
-  /* overflow-y: auto */
+  overflow-y: auto
 }
 
 .left_panel h2 {
@@ -41,7 +44,8 @@
 
 .add_transaction {
   padding: 10px;
-  max-height: 35%;
+  /* max-height: 35%; */
+  border-top: 1px solid rgb(0, 84, 211);
   border-bottom: 1px solid rgb(0, 84, 211);
 }
 
@@ -49,13 +53,15 @@
   padding: 10px 0 10px 10px;
   min-height: 30%;
   max-height: 45%;
-  border-bottom: 1px solid rgb(0, 84, 211);
   overflow-y: auto;
 }
+/* .balance::-webkit-scrollbar {
+  width: 12px;
+} */
 
 .add_acc {
   padding: 10px;
-  min-height: 20%;
+  /* min-height: 20%; */
 }
 .add_acc form {
   width: 100%;
