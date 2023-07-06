@@ -16,7 +16,8 @@ export class AccountsService {
 
   async getAccountsInfo(): Promise<ResponseAccountDto[]> {
     const accounts = await this.prismaService.account.findMany();
-    if (!accounts?.length) throw new NotFoundException('Accounts not found.');
+    if (accounts?.length === 0) return [];
+    if (!accounts) throw new NotFoundException('Accounts not found.');
     return accounts.map((ac) => {
       return new ResponseAccountDto(ac);
     });
@@ -29,16 +30,6 @@ export class AccountsService {
 
     if (!validUser) throw new NotFoundException('Account not found.');
 
-    // if (!validUser) {
-    //   const newAccount = {
-    //     account_id,
-    //     balance: 0,
-    //   };
-    //   await this.prismaService.account.create({
-    //     data: newAccount,
-    //   });
-    //   return new ResponseAccountDto(newAccount);
-    // }
     return new ResponseAccountDto(validUser);
   }
 

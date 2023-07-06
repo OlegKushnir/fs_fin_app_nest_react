@@ -10,7 +10,7 @@ function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [accountsData, setAccountsData] = useState([]);
   const [err, setErr] = useState("");
-  const accounts = accountsData?.map(ac => ac.account_id)
+  const accounts = accountsData?.map((ac) => ac.account_id);
 
   const updateInfo = async (newTransaction) => {
     setTransactions([...transactions, newTransaction]);
@@ -31,24 +31,26 @@ function Dashboard() {
 
   useEffect(() => {
     try {
-      if (!transactions.length) {
-        const getData = async () => {
-          const data = await fetchTransactions();
-          setTransactions(data);
-          const accounts = await fetchAccounts();
-          setAccountsData(accounts);
-        };
-        getData();
-      }
+      const getData = async () => {
+        const data = await fetchTransactions();
+        setTransactions(data);
+        const accounts = await fetchAccounts();
+        setAccountsData(accounts);
+      };
+      getData();
     } catch (error) {
       setErr(error);
     }
-  }, [transactions]);
+  }, []);
   return (
     <div className="App">
       <div className="left_panel">
         <Balance accountsData={accountsData} />
-        <AddTransactionForm updateInfo={updateInfo} accounts={accounts} setErr={setErr} />
+        <AddTransactionForm
+          updateInfo={updateInfo}
+          accounts={accounts}
+          setErr={setErr}
+        />
         <AddAccount updateAccounts={updateAccounts} setErr={setErr} />
       </div>
       <div className="transactions">

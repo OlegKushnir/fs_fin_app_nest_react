@@ -22,7 +22,8 @@ export class TransactionsService {
   constructor(private readonly prismaService: PrismaService) {}
   async getTransactions(): Promise<ResponseTransactionDto[]> {
     const transactions = await this.prismaService.transaction.findMany();
-    if (!transactions?.length) throw new NotFoundException();
+    if (transactions?.length === 0) return [];
+    if (!transactions) throw new NotFoundException();
     return transactions.map((tr) => {
       return new ResponseTransactionDto(tr);
     });
