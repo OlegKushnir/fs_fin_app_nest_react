@@ -41,6 +41,7 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
       setAccountFrom("");
       setAccountTo("");
       setAmount("");
+      setDescr("");
     } catch (error) {
       console.log(error);
       setErr(`Error ${error.response.data.message}`);
