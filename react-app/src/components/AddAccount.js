@@ -1,5 +1,5 @@
 import "./App.css";
-import { createAccount } from "./backend/backend";
+import { createAccount } from "../backend/backend";
 import { useState } from "react";
 
 function AddAccount({ setErr, updateAccounts }) {

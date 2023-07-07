@@ -3,7 +3,7 @@
   margin: 10px;
   border: 2px solid var(--main-color);
   border-radius: 5px;
-  height:calc( 100vh - 20px);
+  height: calc(100vh - 20px);
 }
 
 .App form {
@@ -38,7 +38,7 @@
   min-width: 415px;
   gap: 10px;
   border-right: 2px solid var(--main-color);
-  overflow-y: auto
+  overflow-y: auto;
 }
 
 .left_panel h2 {
@@ -97,18 +97,21 @@
   overflow-y: auto;
 }
 
-.transaction h3{
- font-size: 18px;
+.transaction h3 {
+  font-size: 18px;
 }
 .transaction {
   padding: 8px 20px 8px 20px;
   border-radius: 5px;
   border: 1px solid var(--main-color);
 }
-.transaction p {
-  text-align:end;
- }
-.transaction p span{
+.transaction .thumb {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.transaction p span {
   font-size: 18px;
- font-weight: 700;
+  font-weight: 700;
 }

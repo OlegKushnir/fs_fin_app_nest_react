@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { fetchTransactions, fetchAccounts } from "./backend/backend";
+import { fetchTransactions, fetchAccounts } from "../backend/backend";
 import Transaction from "./Transaction";
 import AddTransactionForm from "./AddTransactionForm";
 import Balance from "./Balance";

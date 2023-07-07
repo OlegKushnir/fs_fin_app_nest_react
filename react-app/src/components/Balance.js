@@ -2,7 +2,6 @@ import "./App.css";
 import BalanceItem from "./BalanceItem";
 
 function Balance({ accountsData }) {
-  console.log(accountsData);
   return (
     <div className="balance">
       <h2>Accounts Balance</h2>

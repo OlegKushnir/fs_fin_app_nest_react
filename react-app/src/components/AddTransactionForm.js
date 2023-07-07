@@ -1,5 +1,5 @@
 import "./App.css";
-import { createTransaction } from "./backend/backend";
+import { createTransaction } from "../backend/backend";
 import { useState } from "react";
 
 function AddTransactionForm({ updateInfo, accounts, setErr }) {
@@ -46,7 +46,6 @@ function AddTransactionForm({ updateInfo, accounts, setErr }) {
       setErr(`Error ${error.response.data.message}`);
     }
     setLoading(false);
-    setErr("");
   };
 
   return (
